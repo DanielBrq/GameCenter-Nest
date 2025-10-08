@@ -1,0 +1,31 @@
+FROM node:22-alpine
+
+RUN apk add --no-cache bash
+
+# Configurar PNPM
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /app
+
+# Copiar solo package.json y lockfile primero
+COPY package.json pnpm-lock.yaml ./
+
+# Instalar dependencias
+RUN pnpm install --frozen-lockfile
+
+# Copiar prisma y todo el código
+COPY prisma ./prisma
+COPY . .
+
+# Generar cliente de Prisma
+RUN pnpm exec prisma generate
+
+# Compilar TypeScript
+RUN pnpm run build
+
+EXPOSE 3000
+
+# Prod
+CMD ["pnpm", "start"]

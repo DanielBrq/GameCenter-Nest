@@ -1,0 +1,179 @@
+// ===========================================
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+
+model Users {
+  id_user               Int      @id @default(autoincrement())
+  user_uuid             String   @unique @default(uuid()) // Identificador único global dentro del sistema (para SQL <=> NoSQL)
+  user_email            String?  @unique
+  user_name             String
+  user_last_name        String
+  user_second_last_name String?
+  user_national_id      String   @unique // Número de identificación nacional o cédula (podría variar según el país)
+  user_birth_date       DateTime @db.Timestamptz
+  active                Boolean  @default(true) // Soft delete
+  createdAt             DateTime @default(now()) @db.Timestamptz
+  updatedAt             DateTime @updatedAt @db.Timestamptz
+
+  // FK rol
+  id_role Int?
+  role    Role? @relation(fields: [id_role], references: [id_role])
+
+  // FK credenciales
+  id_credential Int?
+  credential    Credential? @relation(fields: [id_credential], references: [id_credential])
+
+  bookings Booking[]
+
+  @@index([active])
+}
+
+model Role {
+  id_role          Int     @id @default(autoincrement())
+  role_name        String  @unique
+  role_permissions String?
+  users            Users[]
+}
+
+model Credential {
+  id_credential Int      @id @default(autoincrement())
+  password_hash String
+  provider      String?  @default("local")
+  createdAt     DateTime @default(now()) @db.Timestamptz
+  updatedAt     DateTime @updatedAt @db.Timestamptz
+
+  //FK
+  users Users[]
+}
+
+model Game_genre {
+  id_game_genre Int    @id @default(autoincrement())
+  genre_name    String @unique
+  games         Game[]
+}
+
+model Game {
+  id_game           Int      @id @default(autoincrement())
+  game_uuid         String   @unique @default(uuid())
+  game_title        String
+  game_description  String?
+  game_release_date DateTime @db.Timestamptz
+  active            Boolean  @default(true) // Soft delete
+  createdAt         DateTime @default(now()) @db.Timestamptz
+  updatedAt         DateTime @updatedAt @db.Timestamptz
+
+  // FK género
+  id_game_genre Int?
+  game_genre    Game_genre? @relation(fields: [id_game_genre], references: [id_game_genre])
+
+  game_x_consoles Game_x_console[]
+
+  @@index([active])
+}
+
+model Game_console {
+  id_game_console   Int      @id @default(autoincrement())
+  game_console_uuid String   @unique @default(uuid())
+  game_console_name String   @unique
+  active            Boolean  @default(true) // Soft delete
+  createdAt         DateTime @default(now()) @db.Timestamptz
+  updatedAt         DateTime @updatedAt @db.Timestamptz
+
+  game_x_consoles Game_x_console[]
+  stations        Station[]
+
+  @@index([active])
+}
+
+model Game_x_console {
+  id Int @id @default(autoincrement())
+
+  id_game_console Int
+  game_console    Game_console @relation(fields: [id_game_console], references: [id_game_console])
+
+  id_game Int
+  game    Game @relation(fields: [id_game], references: [id_game])
+
+  @@index([id_game])
+  @@index([id_game_console])
+}
+
+model Station {
+  id_station     Int      @id @default(autoincrement())
+  station_uuid   String   @unique @default(uuid())
+  station_name   String   @unique
+  station_status String   @default("available") // available, occupied, maintenance
+  active         Boolean  @default(true) // Soft delete
+  createdAt      DateTime @default(now()) @db.Timestamptz
+  updatedAt      DateTime @updatedAt @db.Timestamptz
+
+  // FK Consola
+  id_game_console Int
+  game_console    Game_console @relation(fields: [id_game_console], references: [id_game_console])
+  Booking         Booking[]
+
+  @@index([active])
+}
+
+model Player {
+  id_player               Int                @id @default(autoincrement())
+  player_uuid             String             @unique @default(uuid())
+  player_name             String
+  player_last_name        String
+  player_second_last_name String?
+  player_birth_date       DateTime           @db.Timestamptz
+  player_national_id      String?            @unique
+  player_last_visit       DateTime?          @db.Timestamptz // Fecha de la última visita o reserva
+  player_black_list       Boolean            @default(false)
+  active                  Boolean            @default(true) // Soft delete
+  createdAt               DateTime           @default(now()) @db.Timestamptz
+  updatedAt               DateTime           @updatedAt @db.Timestamptz
+  Player_x_booking        Player_x_booking[]
+
+  @@index([active])
+}
+
+model Player_x_booking {
+  id_player_x_booking Int    @id @default(autoincrement())
+  //FK
+  id_player           Int
+  player              Player @relation(fields: [id_player], references: [id_player])
+
+  id_booking Int
+  booking    Booking @relation(fields: [id_booking], references: [id_booking])
+}
+
+// Core model (Une todos los elementos)
+model Booking {
+  id_booking         Int      @id @default(autoincrement())
+  booking_uuid       String   @unique @default(uuid())
+  booking_start_time DateTime @db.Timestamptz // Hora de inicio de la reserva
+  booking_end_time   DateTime @db.Timestamptz // Hora de fin de la reserva
+  booking_date       DateTime @db.Timestamptz // Fecha del la reserva
+  booking_status     String   @default("pending") // pendiente, confirmado, cancelado
+  booking_notes      String?
+  active             Boolean  @default(true) // Soft delete
+  createdAt          DateTime @default(now()) @db.Timestamptz
+  updatedAt          DateTime @updatedAt @db.Timestamptz
+
+  // FK usuario
+  id_user Int
+  users   Users @relation(fields: [id_user], references: [id_user])
+
+  // FK Estación
+  id_station       Int
+  station          Station            @relation(fields: [id_station], references: [id_station])
+  Player_x_booking Player_x_booking[]
+
+  @@index([active])
+}
+
+// ============================================
