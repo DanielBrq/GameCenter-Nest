@@ -90,3 +90,4 @@
 - Rendimiento: alta velocidad de carga (aunque en demo/hosting gratuito puede variar)
 - Consistencia: evitar overbooking
 - Seguridad: Auth JWT, protección contra SQL injection, CSRF, XSS, brute force
+- Internacionalización: Inglés y Español
