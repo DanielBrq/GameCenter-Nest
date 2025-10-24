@@ -16,11 +16,11 @@ export class UserService {
   async createUser(user: CreateUserDto): Promise<User> {
     //verificar correo unico
     if (await this.existEmail(user.user_email)) {
-      throw new ConflictException(ERROR_CODES.duplicated_email);
+      throw new ConflictException(ERROR_CODES.user_duplicated_email);
     }
     //verificar identificación nacional unico
     if (await this.existNationalId(user.user_national_id)) {
-      throw new ConflictException(ERROR_CODES.duplicated_identity);
+      throw new ConflictException(ERROR_CODES.user_duplicated_identity);
     }
     return this.prisma.users.create({
       data: {

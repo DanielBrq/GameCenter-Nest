@@ -8,12 +8,7 @@ import {
   IsOptional,
 } from 'class-validator';
 
-export class updateGameDto {
-  @IsString()
-  @MinLength(1)
-  @IsNotEmpty()
-  game_uuid: string;
-
+export class UpdateGameDto {
   @IsString()
   @MinLength(1)
   @IsNotEmpty()

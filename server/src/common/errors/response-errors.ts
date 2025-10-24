@@ -3,12 +3,12 @@ export const ERROR_CODES = {
   // ==> MODULO AUTH <==
 
   // ==>  MODULO USUARIOS <==
-  duplicated_email: {
+  user_duplicated_email: {
     http_status_code: 409,
     err_code: 'duplicated_email',
     message: 'El email ya está registrado en el sistema.',
   },
-  duplicated_identity: {
+  user_duplicated_identity: {
     http_status_code: 409,
     err_code: 'duplicated_identity',
     message: 'El número de identidad ya está registrado en el sistema.',
@@ -46,6 +46,25 @@ export const ERROR_CODES = {
     message: 'Esta identificación ya se encuentra registrada.',
   },
   // ==>  MODULO JUEGOS <==
-
+  game_not_found: {
+    http_status_code: 404,
+    err_code: 'game_not_found',
+    message: 'Videojuego no encontrado.',
+  },
+  game_title_duplicated: {
+    http_status_code: 409,
+    err_code: 'game_title_duplicated',
+    message: 'El título de este videojuego ya se encuentra registrado.',
+  },
+  game_genre_name_duplicated: {
+    http_status_code: 409,
+    err_code: 'game_genre_name_duplicated',
+    message: 'El este género ya se encuentra registrado.',
+  },
+  game_console_name_duplicated: {
+    http_status_code: 409,
+    err_code: 'game_console_name_duplicated',
+    message: 'El esta consola ya se encuentra registrada.',
+  },
   // ==>  MODULO RESERVAS <==
 };

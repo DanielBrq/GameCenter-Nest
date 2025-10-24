@@ -63,7 +63,7 @@ model Game_genre {
 model Game {
   id_game           Int      @id @default(autoincrement())
   game_uuid         String   @unique @default(uuid())
-  game_title        String
+  game_title        String   @unique
   game_description  String?
   game_release_date DateTime @db.Timestamptz
   active            Boolean  @default(true) // Soft delete
