@@ -2,5 +2,43 @@
   "material-icon-theme.activeIconPack": "nest",
   "css.lint.unknownAtRules": "ignore",
   "less.lint.unknownAtRules": "ignore",
-  "scss.lint.unknownAtRules": "ignore"
+  "scss.lint.unknownAtRules": "ignore",
+
+  "material-icon-theme.folders.associations": {
+    "shared": "shared",
+    "entities": "class",
+    "features": "functions",
+    "widgets": "components",
+    "pages": "views",
+    "app": "core"
+  },
+
+  "material-icon-theme.files.associations": {
+    "index.ts": "typescript",
+    "index.tsx": "react",
+    "model.ts": "interface",
+    "ui.tsx": "react",
+    "config.ts": "settings"
+  },
+
+  "material-icon-theme.showWelcomeMessage": false,
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "e-wc-test.cah4ggoe8cyq.us-east-1.rds.amazonaws.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "connectionTimeout": 60,
+      "password": "FZs35MxdqJj29jd1",
+      "username": "admin",
+      "database": "ewc",
+      "name": "ewc",
+      "group": "factork"
+    }
+  ]
 }
