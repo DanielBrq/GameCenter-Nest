@@ -8,7 +8,7 @@ El sistema incluye autenticación, administración de usuarios, gestión de cons
 ## Stack Tecnológico
 - **Frontend:** React + Vite + TypeScript  
 - **Estilos:** TailwindCSS  
-- **Backend:** Express.js + TypeScript  
+- **Backend:** NestJS + TypeScript  
 - **Base de datos:** PostgreSQL + Prisma (ORM)  
 
 ---
