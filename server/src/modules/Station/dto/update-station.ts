@@ -19,5 +19,5 @@ export class UpdateStationDto {
 
   @IsNumber()
   @IsOptional()
-  readonly id_game_console?: number | null;
+  readonly id_game_console?: number;
 }

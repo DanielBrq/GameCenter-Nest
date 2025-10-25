@@ -92,7 +92,7 @@ export class StationService {
       data: {
         station_name: updateStationDto.station_name,
         station_status: updateStationDto.station_status,
-        id_game_console: updateStationDto.id_game_console || null,
+        id_game_console: updateStationDto.id_game_console,
       },
     });
   }

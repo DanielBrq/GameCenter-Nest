@@ -8,5 +8,5 @@ export interface Station {
   updatedAt: Date;
 
   //FK
-  id_game_console?: number | null;
+  id_game_console?: number;
 }
