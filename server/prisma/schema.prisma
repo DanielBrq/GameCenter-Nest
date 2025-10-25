@@ -10,7 +10,7 @@ datasource db {
 
 // ============================================
 
-model Users {
+model User {
   id_user               Int      @id @default(autoincrement())
   user_uuid             String   @unique @default(uuid()) // Identificador único global dentro del sistema (para SQL <=> NoSQL)
   user_email            String?  @unique
@@ -40,7 +40,7 @@ model Role {
   id_role          Int     @id @default(autoincrement())
   role_name        String  @unique
   role_permissions String?
-  users            Users[]
+  users             User[]
 }
 
 model Credential {
@@ -51,7 +51,7 @@ model Credential {
   updatedAt     DateTime @updatedAt @db.Timestamptz
 
   //FK
-  users Users[]
+  users User[]
 }
 
 model Game_genre {
@@ -166,7 +166,7 @@ model Booking {
 
   // FK usuario
   id_user Int
-  users   Users @relation(fields: [id_user], references: [id_user])
+  users   User @relation(fields: [id_user], references: [id_user])
 
   // FK Estación
   id_station       Int

@@ -8,9 +8,9 @@ import {
   Param,
   Patch,
 } from '@nestjs/common';
-import { UserService } from './users.service';
+import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserResponseDto } from './dto/response-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { plainToInstance } from 'class-transformer';
 
@@ -25,17 +25,17 @@ export class UserController {
   }
 
   @Get('/get-all')
-  async getAllUsers(): Promise<UserResponseDto[]> {
+  async getAllUsers(): Promise<ResponseUserDto[]> {
     const users = await this.userService.findAll();
-    return plainToInstance(UserResponseDto, users);
+    return plainToInstance(ResponseUserDto, users);
   }
 
   @Get('/get/:user_uuid')
   async getUser(
     @Param('user_uuid') user_uuid: string,
-  ): Promise<UserResponseDto> {
+  ): Promise<ResponseUserDto> {
     const users = await this.userService.findOne(user_uuid);
-    return plainToInstance(UserResponseDto, users);
+    return plainToInstance(ResponseUserDto, users);
   }
 
   @Patch('/update/:user_uuid')
