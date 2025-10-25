@@ -5,12 +5,12 @@ export interface Booking {
   booking_end_time: Date;
   booking_date: Date;
   booking_status: string;
-  booking_notes?: string;
+  booking_notes?: string | null;
   active: boolean;
   createdAt: Date;
   updatedAt: Date;
 
   //FK
-  id_user: string;
+  id_user: number;
   id_station: number;
 }

@@ -67,4 +67,9 @@ export const ERROR_CODES = {
     message: 'El esta consola ya se encuentra registrada.',
   },
   // ==>  MODULO RESERVAS <==
+  booking_not_found: {
+    http_status_code: 404,
+    err_code: 'booking_not_found',
+    message: 'Reserva no encontrada.',
+  },
 };
