@@ -1,36 +1,35 @@
 import {
   Controller,
-  Post,
   Body,
   Get,
   HttpStatus,
   HttpCode,
   Param,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Role } from '../Auth/enums/role.enum';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { plainToInstance } from 'class-transformer';
 
 @Controller('users')
+@UseGuards(RolesGuard)
 export class UserController {
-  constructor(private userService: UserService) {}
-
-  @Post('/create')
-  @HttpCode(HttpStatus.CREATED)
-  async createUser(@Body() createUserDto: CreateUserDto) {
-    await this.userService.createUser(createUserDto);
-  }
+  constructor(private userService: UserService) { }
 
   @Get('/get-all')
+  @Roles(Role.Admin)
   async getAllUsers(): Promise<ResponseUserDto[]> {
     const users = await this.userService.findAll();
     return plainToInstance(ResponseUserDto, users);
   }
 
   @Get('/get/:user_uuid')
+  @Roles(Role.Admin)
   async getUser(
     @Param('user_uuid') user_uuid: string,
   ): Promise<ResponseUserDto> {
@@ -39,6 +38,7 @@ export class UserController {
   }
 
   @Patch('/update/:user_uuid')
+  @Roles(Role.Admin)
   @HttpCode(HttpStatus.OK)
   async updateUser(
     @Param('user_uuid') user_uuid: string,
@@ -48,6 +48,7 @@ export class UserController {
   }
 
   @Patch('/deactivate/:user_uuid')
+  @Roles(Role.Admin)
   @HttpCode(HttpStatus.OK)
   async deactivateUser(@Param('user_uuid') user_uuid: string) {
     await this.userService.deactivateUser(user_uuid);

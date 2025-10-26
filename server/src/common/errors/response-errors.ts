@@ -1,7 +1,21 @@
 //Lista de respuesta de errores estandarizado
 export const ERROR_CODES = {
   // ==> MODULO AUTH <==
-
+  auth_email_not_found: {
+    http_status_code: 404,
+    err_code: 'auth_email_not_found',
+    message: 'El email ingresado no está registrado en el sistema.',
+  },
+  auth_password_not_match: {
+    http_status_code: 409,
+    err_code: 'auth_password_not_match',
+    message: 'La contraseña ingresada no coincide.',
+  },
+  auth_user_disabled: {
+    http_status_code: 404,
+    err_code: 'auth_user_disabled',
+    message: 'Esta cuenta se encuentra desactivada',
+  },
   // ==>  MODULO USUARIOS <==
   user_duplicated_email: {
     http_status_code: 409,

@@ -32,11 +32,8 @@ export class ResponseUserDto {
   active: boolean;
 
   @Expose()
-  role: {
-    role_name: string;
-    role_permissions: any;
-  };
-
+  role_name: string;
+  
   @Exclude()
   id_credential: number;
 }

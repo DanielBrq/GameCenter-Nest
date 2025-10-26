@@ -13,34 +13,24 @@ datasource db {
 model User {
   id_user               Int      @id @default(autoincrement())
   user_uuid             String   @unique @default(uuid()) // Identificador único global dentro del sistema (para SQL <=> NoSQL)
-  user_email            String?  @unique
+  user_email            String   @unique
   user_name             String
   user_last_name        String
   user_second_last_name String?
   user_national_id      String   @unique // Número de identificación nacional o cédula (podría variar según el país)
   user_birth_date       DateTime @db.Timestamptz
+  role_name             String   @unique
   active                Boolean  @default(true) // Soft delete
   createdAt             DateTime @default(now()) @db.Timestamptz
   updatedAt             DateTime @updatedAt @db.Timestamptz
 
-  // FK rol
-  id_role Int?
-  role    Role? @relation(fields: [id_role], references: [id_role])
-
   // FK credenciales
-  id_credential Int?
-  credential    Credential? @relation(fields: [id_credential], references: [id_credential])
+  id_credential Int
+  credential    Credential @relation(fields: [id_credential], references: [id_credential])
 
   bookings Booking[]
 
   @@index([active])
-}
-
-model Role {
-  id_role          Int     @id @default(autoincrement())
-  role_name        String  @unique
-  role_permissions String?
-  users             User[]
 }
 
 model Credential {

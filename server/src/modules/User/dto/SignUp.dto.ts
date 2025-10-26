@@ -9,11 +9,11 @@ import {
   Min,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class SignUpDto {
   @IsString()
   @IsEmail()
-  @IsOptional()
-  readonly user_email?: string;
+  @IsNotEmpty()
+  readonly user_email: string;
 
   @IsString()
   @MinLength(1)
@@ -39,14 +39,14 @@ export class CreateUserDto {
   @IsNotEmpty()
   readonly user_birth_date: Date;
 
+  @IsString()
+  @MinLength(1)
+  @IsNotEmpty()
+  readonly role_name: string;
+  
   // FK
   @IsInt()
   @Min(1)
-  @IsOptional()
-  readonly id_role?: number;
-
-  @IsInt()
-  @Min(1)
-  @IsOptional()
-  readonly id_credential?: number;
+  @IsNotEmpty()
+  readonly id_credential: number;
 }

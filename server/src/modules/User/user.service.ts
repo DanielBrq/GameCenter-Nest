@@ -5,48 +5,16 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../../Prisma/prisma.service';
 import { User } from './interfaces/user.interface';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ERROR_CODES } from '../../common/errors/response-errors';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
-
-  async createUser(user: CreateUserDto): Promise<User> {
-    //verificar correo unico
-    if (await this.existEmail(user.user_email)) {
-      throw new ConflictException(ERROR_CODES.user_duplicated_email);
-    }
-    //verificar identificación nacional unico
-    if (await this.existNationalId(user.user_national_id)) {
-      throw new ConflictException(ERROR_CODES.user_duplicated_identity);
-    }
-    return this.prisma.user.create({
-      data: {
-        user_email: user.user_email || null,
-        user_name: user.user_name,
-        user_last_name: user.user_last_name,
-        user_second_last_name: user.user_second_last_name || null,
-        user_national_id: user.user_national_id,
-        user_birth_date: user.user_birth_date,
-        id_role: user.id_role,
-        id_credential: user.id_credential,
-      },
-    });
-  }
+  constructor(private prisma: PrismaService) { }
 
   async findAll(): Promise<User[]> {
     return this.prisma.user.findMany({
-      where: { active: true },
-      include: {
-        role: {
-          select: {
-            role_name: true,
-            role_permissions: true,
-          },
-        },
-      },
+      where: { active: true }
     });
   }
 
@@ -56,21 +24,13 @@ export class UserService {
       typeof id_user === 'number'
         ? id_user
         : // si es uuid (string) busca el id numerico
-          ((await this.findUserId(id_user)) ??
+        ((await this.findUserId(id_user)) ??
           (() => {
             throw new NotFoundException(ERROR_CODES.user_not_found);
           })());
 
     const user = await this.prisma.user.findFirst({
       where: { id_user: userId, active: true },
-      include: {
-        role: {
-          select: {
-            role_name: true,
-            role_permissions: true,
-          },
-        },
-      },
     });
     if (!user) {
       throw new NotFoundException(ERROR_CODES.user_not_found);
@@ -130,7 +90,7 @@ export class UserService {
         user_name: updateUserDto.user_name,
         user_last_name: updateUserDto.user_last_name,
         user_second_last_name: updateUserDto.user_second_last_name,
-        id_role: updateUserDto.id_role,
+        role_name: updateUserDto.role_name,
         id_credential: updateUserDto.id_credential,
       },
     });
