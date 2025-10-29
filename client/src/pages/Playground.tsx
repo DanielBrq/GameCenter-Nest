@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import {
   Dialog,
@@ -71,7 +70,7 @@ export const Playground = () => {
 
       {/* <!-- INPUTS Y FORMULARIOS --> */}
       <section className="m-8">
-        <h2 className="section-title">Inputs y Formularios</h2>
+        <h2 className="section-title mb-4">Inputs y Formularios</h2>
         <div>
           <label className="input-text mr-5">Nombre</label>
           <input
@@ -97,29 +96,17 @@ export const Playground = () => {
             placeholder="********"
           />
         </div>
-        <div className="flex gap-2 flex-col-reverse my-2">
-          <label className="checkbox-base">
-            <input className="" type="checkbox" /> Acepto los términos
-          </label>
-
-          <label className="radio-base">
-            <input type="radio" name="plan" /> Opción 1
-          </label>
-
-          <label className="radio-base">
-            <input className="" type="radio" name="plan" /> Opción 2
-          </label>
-        </div>
-
-        <div className="my-2"></div>
         <div className="my-2">
-          <input type="date" />
+          <input type="date" className="btn-secondary-outline" />
+        </div>
+        <div className="my-2">
+          <input type="time" className="btn-secondary-outline" />
         </div>
       </section>
 
       {/* <!-- DROPDOWN --> */}
       <section className="m-8">
-        <h2 className="section-title">Dropdown</h2>
+        <h2 className="section-title mb-4">Dropdown</h2>
         <Menu as="div" className="relative inline-block">
           <MenuButton className="btn-secondary-outline inline-flex w-full justify-center gap-x-1.5">
             Opciones
@@ -205,21 +192,21 @@ export const Playground = () => {
       <section className="m-8">
         <h2 className="section-title my-2">Tarjetas</h2>
         <div className="grid grid-cols-3 gap-6">
-          <div className="card-base card">
+          <div className="card-base card pt-7 pb-10 pl-5 pr-5">
             <h3 className="card-title">Título de tarjeta</h3>
             <p className="text-gray-400">
               Texto de ejemplo dentro de una tarjeta base.
             </p>
             <button className="btn-primary mt-2">Acción</button>
           </div>
-          <div className="card-base card">
+          <div className="card-base card pt-7 pb-10 pl-5 pr-5">
             <h3 className="card-title">Título de tarjeta</h3>
             <p className="text-gray-400">
               Texto de ejemplo dentro de una tarjeta base.
             </p>
             <button className="btn-success mt-2">Acción</button>
           </div>
-          <div className="card-base card">
+          <div className="card-base card pt-7 pb-10 pl-5 pr-5">
             <h3 className="text-white">Título de tarjeta</h3>
             <p className="text-gray-400">
               Texto de ejemplo dentro de una tarjeta base.
@@ -300,7 +287,8 @@ export const Playground = () => {
         </div>
       </section>
       {/* tablas */}
-      <section>
+      <section className="m-8">
+        <h2 className="section-title">Tabla</h2>
         <table className="w-full">
           <thead>
             <tr>

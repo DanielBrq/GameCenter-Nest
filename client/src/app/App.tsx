@@ -1,7 +1,10 @@
+import { AppRouter } from "./router";
+
+//temporal page
 import { Playground } from "../pages/Playground";
 
 function App() {
-  return <Playground />;
+  return <AppRouter />;
 }
 
 export default App;

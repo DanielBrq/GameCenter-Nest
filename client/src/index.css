@@ -24,7 +24,7 @@ label {
   @apply text-gray-300;
 }
 
-.background {
+:root {
   background-color: #2a2947;
 }
 
@@ -37,7 +37,6 @@ label {
 }
 
 @layer components {
-
   /* btn normal */
   button {
     min-width: 100px;
@@ -132,6 +131,10 @@ label {
   transition-all duration-200 ease-out;
   }
 
+  /* hypertext */
+  a {
+    @apply active:scale-[0.98] transition-all duration-200 ease-out;
+  }
   /* Badges */
 
   .badge-primary {
@@ -157,7 +160,7 @@ label {
   /* text fields */
 
   .text-field {
-    @apply w-80 border-2 rounded-md py-2 px-3 m-1 text-white
+    @apply w-full border-2 rounded-md py-2 px-3 m-1 text-white
   border-indigo-300/40
   disabled:border-blue-200 disabled:bg-blue-50 disabled:text-blue-500 disabled:shadow-none
   focus:border-indigo-500 focus:outline focus:outline-indigo-600
@@ -172,7 +175,7 @@ label {
 
   .card-base,
   .bg-navigator {
-    @apply rounded-xl py-20 p-4
+    @apply rounded-xl p-4
   border border-fuchsia-300/10
   bg-gray-900/40
   backdrop-blur-xl;
