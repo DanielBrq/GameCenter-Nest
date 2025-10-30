@@ -23,7 +23,8 @@
     "seed:dev": "prisma db seed",
     "migrate:prod": "docker-compose -f ../docker-compose.yml --env-file ../server/.env.production exec -T server pnpm exec prisma migrate deploy",
     "db:run:test": "docker-compose -f ../docker-compose.yml --env-file ../server/.env.test up --build",
-    "migrate:test": "docker-compose -f ../docker-compose.yml --env-file ../server/.env.test exec -T server pnpm exec prisma migrate deploy"
+    "migrate:test": "docker-compose -f ../docker-compose.yml --env-file ../server/.env.test exec -T server pnpm exec prisma migrate deploy",
+    "prepare": "husky"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/prisma/seed.dev.ts"
@@ -63,6 +64,7 @@
     "eslint-config-prettier": "10.0.1",
     "eslint-plugin-prettier": "5.2.2",
     "globals": "16.0.0",
+    "husky": "^9.1.7",
     "jest": "30.0.0",
     "prettier": "3.4.2",
     "prisma": "6.16.2",
