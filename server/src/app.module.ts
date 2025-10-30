@@ -21,13 +21,13 @@ import { PrismaModule } from './Prisma/prisma.module';
       {
         name: 'medium',
         ttl: 10000,
-        limit: 20
+        limit: 20,
       },
       {
         name: 'long',
         ttl: 60000,
-        limit: 100
-      }
+        limit: 100,
+      },
     ]),
     ConfigModule.forRoot(),
     PrismaModule,
@@ -36,7 +36,7 @@ import { PrismaModule } from './Prisma/prisma.module';
     UsersModule,
     GameModule,
     PlayerModule,
-    StationModule
+    StationModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

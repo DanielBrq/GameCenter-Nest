@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
-  app.enableCors()
+  app.enableCors();
   await app.listen(process.env.PORT ?? 3000);
 
   app.useGlobalPipes(
@@ -19,6 +19,5 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   console.log('Server running on: http://localhost:3000/');
-
 }
 void bootstrap();

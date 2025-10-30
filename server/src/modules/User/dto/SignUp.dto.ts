@@ -43,7 +43,7 @@ export class SignUpDto {
   @MinLength(1)
   @IsNotEmpty()
   readonly role_name: string;
-  
+
   // FK
   @IsInt()
   @Min(1)

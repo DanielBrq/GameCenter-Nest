@@ -14,6 +14,4 @@ export class SignUpDto {
   @IsEmail()
   @IsNotEmpty()
   readonly user_email: string;
-
-  
 }

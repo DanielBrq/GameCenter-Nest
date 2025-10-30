@@ -19,7 +19,7 @@ import { plainToInstance } from 'class-transformer';
 @Controller('users')
 @UseGuards(RolesGuard)
 export class UserController {
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   @Get('/get-all')
   @Roles(Role.Admin)

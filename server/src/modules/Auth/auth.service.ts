@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../Prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -16,8 +21,8 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
-    private user: UserService
-  ) { }
+    private user: UserService,
+  ) {}
 
   //Crear cuenta
   async signUp(user: SignUpDto): Promise<User> {
@@ -76,20 +81,20 @@ export class AuthService {
     const database_hash = userAuth.credential?.password_hash;
 
     //Verificar coincidencia de contraseña
-    if (!(await this.verifyPassword(hashPassword, database_hash))
-    ) { throw new UnauthorizedException(ERROR_CODES.auth_password_not_match) }
+    if (!(await this.verifyPassword(hashPassword, database_hash))) {
+      throw new UnauthorizedException(ERROR_CODES.auth_password_not_match);
+    }
 
     const payload: JWT = {
       sub: userAuth.id_user,
       name: userAuth.user_name,
       last_name: userAuth.user_last_name,
       email: userAuth.user_email,
-      role: userAuth.role_name
-    }
+      role: userAuth.role_name,
+    };
 
     //Firmar y retornar Token JWT
     return await this.signJWT(payload);
-
   }
 
   // => Hacer login sin credenciales (solo entorno desarrollo)
@@ -99,8 +104,8 @@ export class AuthService {
       name: 'dev_user',
       last_name: 'account',
       email: 'devgamecenter@gmail.com',
-      role: Role.Admin
-    }
+      role: Role.Admin,
+    };
     return await this.signJWT(payload);
   }
 

@@ -33,7 +33,7 @@ export class ResponseUserDto {
 
   @Expose()
   role_name: string;
-  
+
   @Exclude()
   id_credential: number;
 }

@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../Prisma/prisma.service';
 import { User } from './interfaces/user.interface';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -10,11 +6,11 @@ import { ERROR_CODES } from '../../common/errors/response-errors';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<User[]> {
     return this.prisma.user.findMany({
-      where: { active: true }
+      where: { active: true },
     });
   }
 
@@ -24,7 +20,7 @@ export class UserService {
       typeof id_user === 'number'
         ? id_user
         : // si es uuid (string) busca el id numerico
-        ((await this.findUserId(id_user)) ??
+          ((await this.findUserId(id_user)) ??
           (() => {
             throw new NotFoundException(ERROR_CODES.user_not_found);
           })());
