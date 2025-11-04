@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+:root {
+  background-color: #2a2947;
+}
+
 h1 {
   @apply text-6xl font-bold tracking-tight text-gray-50;
 }
@@ -24,10 +28,6 @@ label {
   @apply text-gray-300;
 }
 
-:root {
-  background-color: #2a2947;
-}
-
 @theme {
   /* Fuentes */
   --font-sans: "Inter", Arial, sans-serif;
@@ -38,9 +38,6 @@ label {
 
 @layer components {
   /* btn normal */
-  button {
-    min-width: 100px;
-  }
 
   .btn-test {
     @apply px-5 py-1 rounded-lg text-blue-200 text-sm font-semibold bg-[var(--color-test)]
@@ -51,11 +48,12 @@ label {
   }
 
   .btn-primary {
-    @apply px-5 py-1 rounded-lg text-blue-200 text-sm font-semibold 
+    @apply px-0 py-1 rounded-lg text-blue-200 text-sm font-semibold 
   border  border-indigo-500 bg-gradient-to-t from-indigo-600
   hover:bg-indigo-600/5 hover:text-indigo-100 hover:font-semibold
   active:bg-indigo-600/40 active:text-gray-100 active:font-semibold active:scale-[0.98]
   transition-all duration-200 ease-out;
+    min-width: 100px;
   }
 
   .btn-secondary {
@@ -165,10 +163,36 @@ label {
   disabled:border-blue-200 disabled:bg-blue-50 disabled:text-blue-500 disabled:shadow-none
   focus:border-indigo-500 focus:outline focus:outline-indigo-600
   invalid:border-pink-500 invalid:text-pink-600  focus:invalid:border-pink-500 focus:invalid:outline-pink-500;
+    margin: 0;
   }
 
   .text-field-valid {
     @apply valid:border-emerald-500 valid:text-emerald-400  focus:valid:border-emerald-500 focus:valid:outline-emerald-500;
+  }
+
+  .password-button {
+    @apply bg-indigo-100/10 border-l-2 rounded-l-none border-2 rounded-md border-indigo-300/40 w-[50px]
+    flex items-center justify-center
+    hover:bg-indigo-100/20;
+  }
+
+  .password-button svg {
+    @apply text-indigo-100/70 size-5 group-hover:text-indigo-200/90 group-active:scale-[0.90]
+    transition-all duration-200 ease-out;
+  }
+
+  /* Select option */
+  .select {
+    @apply w-full border-2 rounded-md py-2 px-3 m-1 text-white
+  border-indigo-300/40
+  disabled:border-blue-200 disabled:bg-blue-50 disabled:text-blue-500 disabled:shadow-none
+  focus:border-indigo-500 focus:outline focus:outline-indigo-600;
+    margin: 0;
+  }
+
+  .option {
+    @apply bg-gray-950/88 text-indigo-200
+    focus:bg-rose-500;
   }
 
   /* card */
